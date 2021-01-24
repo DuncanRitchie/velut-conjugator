@@ -14,128 +14,148 @@ const textareaOutput = document.getElementById("textarea-output");
 const textByCopyToClipboard = document.getElementById("text-by-copy-to-clipboard");
 const buttonCopyToClipboard = document.getElementById("copy-to-clipboard");
 
-const sampleData = "amō amāre amāvī amātum; doceō docēre docuī doctum; loquor loquī locūtum";
+const sampleData = "amō amāre amāvī amātum; cubō cubāre cubuī cubitum; doceō docēre docuī doctum; tangō tangere tetigī tāctum; audiō audīre audīvī audītum; hortor hortārī hortātum; vereor verērī veritum; loquor loquī locūtum; potior potīrī potītum; orior orīrī ortum";
 
 const schemata = [
     {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
+        "Description":           "1st, non-deponent",
+        "Unstressed endings":    {
+            "Present stem":      ["ō","ās","at","ant","or","em","ēs","et","ent","er","ā","āns"],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "āre",
+    },
+    {
+        "Description":           "2nd, non-deponent",
+        "Unstressed endings":    {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "ēre",
+    },
+    {
+        "Description":           "3rd, non-deponent",
+        "Unstressed endings":    {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "ere",
+    },
+    {
+        "Description":           "4th, non-deponent",
+        "Unstressed endings":    {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "īre",
+    },
+    {
+        "Description":           "1st, deponent",
+        "Unstressed endings":    {
+            "Present stem":      ["or","er","āns"],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "ārī",
+    },
+    {
+        "Description":           "2nd, deponent",
+        "Unstressed endings":    {
+            "Present stem":      ["eō","ēs","et","ent","ē","ēns"],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "ērī",
+    },
+    {
+        "Description":           "4th, deponent",
+        "Unstressed endings":    {
+            "Present stem":      ["ior","iēns"],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "īrī",
+    },
+    {
+        "Description":           "3rd, deponent",
+        "Unstressed endings":    {
+            "Present stem":      ["or","eris","ere","itur","imur","ēns"],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "ī",
     },
     {
         "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
+        "Unstressed endings":    {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "",
     },
     {
         "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    [],
-        "Stressed endings":      [],
+        "Unstressed endings":    {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Stressed endings":      {
+            "Present stem":      [],
+            "Perfect stem":      [],
+            "Supine stem":       [],
+        },
+        "Infinitive ending":     "",
     },
 ]
 
@@ -147,7 +167,7 @@ const getDescriptionsFromSchemata = () => {
 
 const getSchemaDescriptionForPrincipalParts = (principalParts) => {
     const find = schemata.find(schema => {
-        return principalParts[1].endsWith(schema["Principal part ending"]);
+        return principalParts[1].endsWith(schema["Infinitive ending"]);
     })
 
     return find?.Description ?? "1st, -āvī perfect";
