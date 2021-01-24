@@ -14,7 +14,16 @@ const textareaOutput = document.getElementById("textarea-output");
 const textByCopyToClipboard = document.getElementById("text-by-copy-to-clipboard");
 const buttonCopyToClipboard = document.getElementById("copy-to-clipboard");
 
-const sampleData = "amō amāre amāvī amātum; cubō cubāre cubuī cubitum; doceō docēre docuī doctum; tangō tangere tetigī tāctum; audiō audīre audīvī audītum; hortor hortārī hortātum; vereor verērī veritum; loquor loquī locūtum; potior potīrī potītum; orior orīrī ortum";
+const sampleData = `amō amāre amāvī amātum
+cubō cubāre cubuī cubitum
+doceō docēre docuī doctum
+tangō tangere tetigī tāctum
+audiō audīre audīvī audītum
+hortor hortārī hortātum
+vereor verērī veritum
+loquor loquī locūtum
+potior potīrī potītum
+orior orīrī ortum`;
 
 const schemata = [
     {
