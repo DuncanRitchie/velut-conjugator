@@ -258,16 +258,17 @@ const generateSelectConjugationsTable = () => {
     const principalPartsArray = getPrincipalPartsFromInput();
 
     let innerHtml = "";
-    principalPartsArray.map(principalPart => {
-        const conjugationDescription = getSchemaDescriptionForPrincipalParts(principalPart);
+    principalPartsArray.map(principalPartsArray => {
+        const conjugationDescription = getSchemaDescriptionForPrincipalParts(principalPartsArray);
+        const principalPartsPretty = principalPartsArray.join(", ");
 
         innerHtml = `${innerHtml}
         <tr>
         <td lang="la">
-        ${principalPart}
+        ${principalPartsPretty}
         </td>
         <td>
-        <input id="conjugation-input-${principalPart}" list="conjugation-descriptions" value="${conjugationDescription}"/>
+        <input list="conjugation-descriptions" value="${conjugationDescription}"/>
         </td>
         </tr>`;
     });
