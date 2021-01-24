@@ -43,7 +43,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Principal part endings": ["eō","ēre","ēvī","ētum"],
+        "Principal part endings": ["eō","ēre","ī","um"],
     },
     {
         "Description":           "3rd, non-deponent",
@@ -106,14 +106,14 @@ const schemata = [
         "Unstressed endings":    {
             "Present stem":      ["ior","iar","iēns"],
             "Perfect stem":      [],
-            "Supine stem":       [],
+            "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Principal part endings": ["iōr","īrī","ītum"],
+        "Principal part endings": ["iōr","īrī","um"],
     },
     {
         "Description":           "3rd, deponent",
@@ -347,6 +347,42 @@ const displayConjugatedOutput = (arrayOfFormObjects) => {
         .join("\n");
 }
 
+//// By “system” I mean one of three descriptions of stems that endings may be added onto.
+//// Deponent verbs have two and non-deponent verbs have three.
+//// These are also the keys of the "Unstressed endings" and "Stressed endings" objects in `schemata`.
+const getSystems = (principalParts) => {
+    if (principalParts.length === 3) {
+        return ["Present stem","Supine stem"];
+    }
+    else {
+        return ["Present stem","Perfect stem","Supine stem"];
+    }
+}
+
+const getStemFromStems = (stems, system) => {
+    //// Deponent verbs have three principal parts.
+    if (stems.length === 3) {
+        if (system === "Present stem") {
+            return stems[0];
+        }
+        if (system === "Supine stem") {
+            return stems[2];
+        }
+    }
+    //// Non-deponent verbs have four principal parts.
+    else {
+        if (system === "Present stem") {
+            return stems[0];
+        }
+        if (system === "Perfect stem") {
+            return stems[2];
+        }
+        if (system === "Supine stem") {
+            return stems[3];
+        }
+    }
+}
+
 const conjugate = () => {
     const countLemmata = tbody.children.length;
     const includeStressedEndings = tickboxIncludeStressedEndings.checked;
@@ -364,39 +400,26 @@ const conjugate = () => {
         console.log("schema", schema);
         const stems = getStemsFromPrincipalParts(principalParts, schema["Principal part endings"]);
         console.log("stems", stems);
-        lemma = getLemmaFromPrincipalParts(principalParts);
+        const lemma = getLemmaFromPrincipalParts(principalParts);
         console.log("lemma", lemma);
 
-        schema["Unstressed endings"]["Present stem"].map(ending => {
-            const form = `${stems[0]}${ending}`;
-            pushToConjugatedForms(form, lemma);
-        })
-
-        schema["Unstressed endings"]["Perfect stem"].map(ending => {
-            const form = `${stems[2]}${ending}`;
-            pushToConjugatedForms(form, lemma);
-        })
-
-        schema["Unstressed endings"]["Supine stem"].map(ending => {
-            const form = `${stems[3]}${ending}`;
-            pushToConjugatedForms(form, lemma);
-        })
+        const systems = getSystems(stems);
+        systems
+            .forEach(system => {
+                    schema["Unstressed endings"][system].forEach(ending => {
+                        const form = `${getStemFromStems(stems, system)}${ending}`;
+                        pushToConjugatedForms(form, lemma);
+                    });
+                });
 
         if (includeStressedEndings) {
-            schema["Stressed endings"]["Present stem"].map(ending => {
-                const form = `${stems[0]}${ending}`;
-                pushToConjugatedForms(form, lemma);
-            })
-    
-            schema["Stressed endings"]["Perfect stem"].map(ending => {
-                const form = `${stems[2]}${ending}`;
-                pushToConjugatedForms(form, lemma);
-            })
-    
-            schema["Stressed endings"]["Supine stem"].map(ending => {
-                const form = `${stems[3]}${ending}`;
-                pushToConjugatedForms(form, lemma);
-            })
+            systems
+            .forEach(system => {
+                    schema["Stressed endings"][system].forEach(ending => {
+                        const form = `${getStemFromStems(stems, system)}${ending}`;
+                        pushToConjugatedForms(form, lemma);
+                    });
+                });
         }
     }
 
