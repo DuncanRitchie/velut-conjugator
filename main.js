@@ -34,9 +34,9 @@ const schemata = [
     {
         "Description":           "2nd, non-deponent",
         "Unstressed endings":    {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
+            "Present stem":      ["eō","ēs","et","ent","eor","eam","eās","eat","eant","ear","ē","ēns"],
+            "Perfect stem":      ["ī","it","imus","eram","erās","erat","erant","erō","eris","erit","erint","erim","erīs"],
+            "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
@@ -48,9 +48,9 @@ const schemata = [
     {
         "Description":           "3rd, non-deponent",
         "Unstressed endings":    {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
+            "Present stem":      ["ō","is","it","imus","itis","unt","am","ēs","et","ent","or","eris","ere","itur","imur","ar","ās","at","ant","erem","erēs","eret","erent","erer","e","ite","itō","itor","ī","ēns"],
+            "Perfect stem":      ["ī","it","imus","eram","erās","erat","erant","erō","eris","erit","erint","erim","erīs"],
+            "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
@@ -62,7 +62,7 @@ const schemata = [
     {
         "Description":           "4th, non-deponent",
         "Unstressed endings":    {
-            "Present stem":      [],
+            "Present stem":      ["iō","īs","it","iunt","iam","iēs","iet","ient","ior","iar","iās","iat","iant","ī","iēns"],
             "Perfect stem":      [],
             "Supine stem":       [],
         },
@@ -90,21 +90,21 @@ const schemata = [
     {
         "Description":           "2nd, deponent",
         "Unstressed endings":    {
-            "Present stem":      ["eor","ēns"],
+            "Present stem":      ["eor","ear","ēns"],
             "Perfect stem":      [],
-            "Supine stem":       [],
+            "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Principal part endings": ["eor","ērī","ētum"],
+        "Principal part endings": ["eor","ērī","um"],
     },
     {
         "Description":           "4th, deponent",
         "Unstressed endings":    {
-            "Present stem":      ["ior","iēns"],
+            "Present stem":      ["ior","iar","iēns"],
             "Perfect stem":      [],
             "Supine stem":       [],
         },
@@ -118,9 +118,9 @@ const schemata = [
     {
         "Description":           "3rd, deponent",
         "Unstressed endings":    {
-            "Present stem":      ["or","eris","ere","itur","imur","ēns"],
+            "Present stem":      ["or","eris","ere","itur","imur","ar","erer","itor","ī","ēns"],
             "Perfect stem":      [],
-            "Supine stem":       [],
+            "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
