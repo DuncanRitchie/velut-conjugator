@@ -14,129 +14,128 @@ const textareaOutput = document.getElementById("textarea-output");
 const textByCopyToClipboard = document.getElementById("text-by-copy-to-clipboard");
 const buttonCopyToClipboard = document.getElementById("copy-to-clipboard");
 
-const sampleData = "terra Ariadnē corvus cerebrum fīlius officium puer(n) avis cōnsul amor/amōris genus/generis animal/animālis manus/manūs cornū diēs probus(adj) signifer[n] signifer[adj] tenāx/tenācis(adj) probē(adv) tenāciter cōnstanter libenter";
+const sampleData = "amō amāre amāvī amātum; doceō docēre docuī doctum; loquor loquī locūtum";
 
-//// "Principal part ending" is the ending that will trigger the schema being automatically assigned for a lemma.
 const schemata = [
     {
-        "Description":           "1st, noun, Latin-style",
-        "Unstressed endings":    ["a","ae","am","ā","ās","īs"],
-        "Stressed endings":      ["ārum"],
-    },
-    {
-        "Description":           "1st, noun, Greek-style",
-        "Unstressed endings":    ["ē","ēs","ēn","ae","ās","īs"],
-        "Stressed endings":      ["ārum"],
-    },
-    {
-        "Description":           "2nd, noun, masculine/feminine, -ius",
-        "Unstressed endings":    ["ius","iī","ī","iō","ium","iōs","iīs"],
-        "Stressed endings":      ["iōrum"],
-    },
-    {
-        "Description":           "2nd, noun, masculine/feminine, -us",
-        "Unstressed endings":    ["us","ī","e","ō","um","ōs","īs"],
-        "Stressed endings":      ["ōrum"],
-    },
-    {
-        "Description":           "2nd, noun, neuter, -ium",
-        "Unstressed endings":    ["ium","iī","ī","iō","ium","ia","iīs"],
-        "Stressed endings":      ["iōrum"],
-    },
-    {
-        "Description":           "2nd, noun, neuter, -um",
-        "Unstressed endings":    ["um","ī","ō","um","a","īs"],
-        "Stressed endings":      ["ōrum"],
-    },
-    {
-        "Description":           "3rd, noun, masculine/feminine, consonant stem",
-        "Unstressed endings":    ["","is","em","ī","e","ēs","um","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, noun, masculine/feminine, -i stem",
-        "Unstressed endings":    ["","is","em","ī","ēs","ium","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, noun, neuter, consonant stem",
-        "Unstressed endings":    ["","is","ī","a","um","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, noun, neuter, -i stem",
-        "Unstressed endings":    ["","is","ī","ia","ium","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "4th, noun, -us nominative",
-        "Unstressed endings":    ["us","ūs","um","uī","ū","uum","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "4th, noun, -ū nominative",
-        "Unstressed endings":    ["ū","ūs","ua","uum","ibus"],
+        "Description":           "",
+        "Unstressed endings":    [],
         "Stressed endings":      [],
     },
     {
-        "Description":           "5th, noun",
-        "Unstressed endings":    ["ēs","em","ē"],
-        "Stressed endings":      ["ēī","ērum","ēbus"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "Adverb, -ē",
-        "Unstressed endings":    ["ē","ius"],
-        "Stressed endings":      ["issimē"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "Adverb, -iter",
-        "Unstressed endings":    ["iter","ius"],
-        "Stressed endings":      ["issimē"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "Adverb, -nter",
-        "Unstressed endings":    ["nter","ntius"],
-        "Stressed endings":      ["ntissimē"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "1st/2nd, adjective, -us",
-        "Unstressed endings":    ["us","ī","e","ō","um","ōs","a","ae","am","ā","ās","īs","ior","ius"],
-        "Stressed endings":      ["ārum","ōrum","iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "1st/2nd, adjective, -er/erī",
-        "Unstressed endings":    ["er","erī","ere","erō","erum","erōs","era","erae","eram","erā","erās","erīs"],
-        "Stressed endings":      ["erārum","erōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "1st/2nd, adjective, -er/rī",
-        "Unstressed endings":    ["er","rī","re","rō","rum","rōs","ra","rae","ram","rā","rās","rīs"],
-        "Stressed endings":      ["rārum","rōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, adjective, -āns nominative singular",
-        "Unstressed endings":    ["āns","antis","ante","antem","antī","antēs","antia","antium","antibus","antior","antius"],
-        "Stressed endings":      ["antiōris","antiōrem","antiōrī","antiōre","antiōrēs","antiōrum","antiōribus","antissimus","antissimī","antissime","antissimō","antissimum","antissimōs","antissima","antissimae","antissimam","antissimā","antissimās","antissimīs","antissimārum","antissimōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, adjective, -ēns nominative singular",
-        "Unstressed endings":    ["ēns","entis","ente","entem","entī","entēs","entia","entium","entibus","entior","entius"],
-        "Stressed endings":      ["entiōris","entiōrem","entiōrī","entiōre","entiōrēs","entiōrum","entiōribus","entissimus","entissimī","entissime","entissimō","entissimum","entissimōs","entissima","entissimae","entissimam","entissimā","entissimās","entissimīs","entissimārum","entissimōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, adjective, one-form nominative singular",
-        "Unstressed endings":    ["","is","em","ī","ēs","ia","ium","ibus","ior","ius"],
-        "Stressed endings":      ["iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "3rd, adjective, two-form nominative singular",
-        "Unstressed endings":    ["","is","e","em","ī","ēs","ia","ium","ibus","ior","ius"],
-        "Stressed endings":      ["iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
     {
-        "Description":           "2nd, noun, -er/-erī",
-        "Unstressed endings":    ["er","erī","ere","erō","erum","erōs","erīs"],
-        "Stressed endings":      ["erōrum"],
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
+    },
+    {
+        "Description":           "",
+        "Unstressed endings":    [],
+        "Stressed endings":      [],
     },
 ]
 
