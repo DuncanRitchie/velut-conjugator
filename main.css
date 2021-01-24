@@ -26,6 +26,11 @@ td input {
     padding: 0.25rem;
 }
 
+#tickboxes-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 input[type="checkbox"] {
     opacity: 0;
 }
