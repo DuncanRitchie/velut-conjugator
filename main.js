@@ -130,34 +130,34 @@ const schemata = [
         },
         "Principal part endings": ["or","ī","um"],
     },
-    {
-        "Description":           "",
-        "Unstressed endings":    {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
-        },
-        "Stressed endings":      {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
-        },
-        "Principal part endings": [],
-    },
-    {
-        "Description":           "",
-        "Unstressed endings":    {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
-        },
-        "Stressed endings":      {
-            "Present stem":      [],
-            "Perfect stem":      [],
-            "Supine stem":       [],
-        },
-        "Principal part endings": [],
-    },
+    // {
+    //     "Description":           "",
+    //     "Unstressed endings":    {
+    //         "Present stem":      [],
+    //         "Perfect stem":      [],
+    //         "Supine stem":       [],
+    //     },
+    //     "Stressed endings":      {
+    //         "Present stem":      [],
+    //         "Perfect stem":      [],
+    //         "Supine stem":       [],
+    //     },
+    //     "Principal part endings": [],
+    // },
+    // {
+    //     "Description":           "",
+    //     "Unstressed endings":    {
+    //         "Present stem":      [],
+    //         "Perfect stem":      [],
+    //         "Supine stem":       [],
+    //     },
+    //     "Stressed endings":      {
+    //         "Present stem":      [],
+    //         "Perfect stem":      [],
+    //         "Supine stem":       [],
+    //     },
+    //     "Principal part endings": [],
+    // },
 ]
 
 const getDescriptionsFromSchemata = () => {
