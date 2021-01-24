@@ -1,0 +1,54 @@
+h1 ~ h2 {
+    text-align: left;
+    font-size: 1.25rem;
+}
+
+textarea, td input {
+    font-size: 0.75rem;
+    font-family: "Monaco", "Consolas", monospace;
+}
+
+table {
+    margin-bottom: 1rem;
+}
+
+td + td {
+    width: 100%;
+}
+
+td input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.25rem;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+}
+
+input[type="checkbox"] + label {
+    margin-right: 2.5rem;
+}
+
+input[type="checkbox"] + label::after {
+    position: absolute;
+    margin-top: -0.25rem;
+    margin-left: 0.5rem;
+    width: 1.75rem;
+    height: 1.5rem;
+    padding-top: 0.25rem;
+    border: 0.5px solid var(--nav-text);
+    cursor: pointer;
+    text-align: center;
+    content: "NO";
+    background: var(--colour2);
+}
+
+input[type="checkbox"]:checked + label::after {
+    content: "YES";
+    background: var(--colour6);
+}
+
+input[type="checkbox"]:focus + label::after {
+    outline: 2px dashed var(--visited-text);
+}

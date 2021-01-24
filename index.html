@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generates inflected forms of Latin nouns, adjectives, and adverbs.">
+    <title>Latin declensions for velut</title>
+    <link rel="shortcut icon" href="https://www.duncanritchie.co.uk/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/main.css">
+    <link rel="stylesheet" href="https://www.duncanritchie.co.uk/velut-json-generator/main.css">
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+    <main>
+        <h1>Duncan’s Latin declensions for velut</h1>
+        <div>
+            <button id="clear-inputs">Clear</button>
+            <button id="load-sample-data">Load sample</button>
+        </div>
+        <label for="textarea-input">Enter Latin nouns/adjectives/adverbs here (or use sample):</label><br/>
+        <textarea id="textarea-input" lang="la"></textarea><br/>
+        <div>
+            <span id="text-by-select-declensions"></span>
+            <button id="generate-select-declensions-table">Start choosing declensions</button>
+        </div>
+        <p>
+            <span id="text-before-table"></span>
+        </p>
+        <table>
+            <tbody id="tbody">
+                <!-- Generated rows look like this: -->
+                <!-- <tr>
+                    <td lang="la">puella</td>
+                    <td>
+                        <input id="declension-input-puella" list="declension-descriptions" value="1st, noun, Latin-style"/>
+                    </td>
+                </tr> -->
+            </tbody>
+            <datalist id="declension-descriptions">
+                <!-- Generated options look like this: -->
+                <!-- <option value="1st, noun, Latin-style"/>
+                <option value="1st, noun, Greek-style"/>
+                <option value="2nd, noun, -us nominative"/>
+                <option value="2nd, noun, -um nominative"/>
+                <option value="3rd, noun, -i stem"/>
+                <option value="3rd, noun, non-i stem"/>
+                <option value="4th, noun, -us nominative"/>
+                <option value="4th, noun, -ū nominative"/>
+                <option value="5th, noun"/>
+                <option value="1st/2nd, adjective"/>
+                <option value="3rd, adjective, one-form nominative singular"/>
+                <option value="3rd, adjective, two-form nominative singular"/> -->
+            </datalist>
+        </table>
+        <div>
+            <input type="checkbox" id="include-stressed-endings" />
+            <label for="include-stressed-endings">Include stressed endings?</label>
+        </div>
+        <div>
+            <input type="checkbox" id="combine-lemmata" checked />
+            <label for="combine-lemmata">Combine forms from multiple lemmata?</label>
+        </div>
+        <div>
+            <input type="checkbox" id="output-lemma" checked />
+            <label for="output-lemma">Output lemma with each form?</label>
+        </div>
+        <div>
+            <button id="decline">Decline</button><br/>
+        </div>
+        <label for="textarea-output">Output forms:</label><br/>
+        <textarea id="textarea-output" lang="la" readonly></textarea>
+        <div>
+            <span id="text-by-copy-to-clipboard"></span>
+            <button id="copy-to-clipboard">Copy to clipboard</button>
+        </div>
+
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                <a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a> is my Latin vocabulary website. I review all words before adding them to velut. This is made faster by generating forms using this webpage.
+            </p>
+            <p>
+                If you’re not me (Duncan Ritchie), you’re unlikely to have much use for this page. If you’re interested in Latin vocabulary though, you should definitely take a look at <a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a>!
+            </p>
+            <h3>Note on the word “lemma”</h3>
+            <p>
+                The lemma of a word is the form given as the headword in dictionaries; for nouns it’s usually the nominative singular.
+            </p>
+            <h3>How to use</h3>
+            <p>
+                Enter the lemmata of Latin nouns/adjectives/adverbs into the first input box. These can be separated by spaces, line-breaks, commas, or semicolons. I provide some sample words that you can load if you want.
+            </p>
+            <p>
+                For words of the third declension, please enter both the nominative singular and the genitive singular, separated by a slash, eg “<span lang="la">amor/amōris</span>”. (But if the nominative singular is the same as the genitive singular, with or without the -is ending, it’s fine to just give the nominative singular, eg “<span lang="la">avis</span>” and “<span lang="la">cōnsul</span>” will yield the same output as “<span lang="la">avis/avis</span>” and “<span lang="la">cōnsul/cōnsulis</span>”.)
+            </p>
+            <p>
+                This trick (of supplying the genitive singular after a slash) also works for fourth declension nouns with nominative singular -us, so you can type either “<span lang="la">manus</span>” or “<span lang="la">manus/manūs</span>”.
+            </p>
+            <p>
+                Then, click the “Start choosing declensions” button. A table will appear listing every word you put in, alongside a declension — such as “3rd, noun, consonant stem” — that has been automatically determined for each word.
+            </p>
+            <p>
+                This page determines the declension based on the final letters of the word, so is frequently wrong. You can, however, edit the declension, by deleting the incorrect text and choosing a different declension from the list that appears.
+            </p>
+            <p>
+                Once you are happy with the table of lemmata and declensions, click “Decline”. A list of all the forms will appear in the box underneath. Forms that are stressed on the ending may appear if the “Include stressed endings” tickbox is ticked. The lemma that each form came from may appear beside each lemma (separated by a tab), depending on whether the “Output lemma” tickbox is ticked.
+            </p>
+            <p>
+                Finally, you can click the “Copy to clipboard” button.
+            </p>
+            <h3>Brackets in input</h3>
+            <p>
+                In the input, you can include one of the following abbreviations in brackets after any word: “adj”, “adv”, “n”, or “prn”. These stand for “adjective”, “adverb”, “(non-proper) noun”, and “proper noun”, respectively.
+            </p>
+            <p>
+                This page takes the abbreviation into account when automatically assigning a declension to the word, though they are optional.
+            </p>
+            <p>
+                Marking a word as a proper noun has the same effect on which declension is automatically assigned as marking it as a non-proper noun. “<span lang="la">Deus[prn]</span>” and “<span lang="la">deus[n]</span>” will both be assigned “2nd, noun, masculine/feminine, -us”, for instance.
+            </p>
+            <p>
+                If square brackets are used, the abbreviation will appear in the final output with the lemma, if the “Output lemmata?” tickbox is ticked.
+            </p>
+            <p>
+                If round brackets are used, the abbreviation will not appear in the output.
+            </p>
+            <h3>Caveats</h3>
+            <p>
+                Please note: you need to look over all the declined forms that have been generated, because this webpage is quite rudimentary and not every inflection makes sense for every lemma.
+            </p>
+            <p>
+                Also, this page assumes you’re capable of entering letters with macra (the diacritics on ĀĒĪŌŪȲāēīōūȳ) into the first input box.
+            </p>
+            <p>
+                If the lemma (or genitive singular) does not end with the letters this page expects, all the forms will probably be wrong.
+            </p>
+            <p>
+                For the third declension, and for fourth declension nouns with lemmata in -us, you can input the genitive singular after a slash and the output may be what you want. For fourth declension nouns with nominative singular -ū, and for the other declensions (1st/2nd/5th), please only supply the nominative singular. That is, “<span lang="la">amor/amōris</span>” and “<span lang="la">manus/manūs</span>” will yield the correct output (even if you don’t manually change the declension in the table), but “<span lang="la">terra/terrae</span>”, “<span lang="la">corvus/corvī</span>”, “<span lang="la">cornū/cornūs</span>” will not.
+            </p>
+            <p>
+                Some Latin nouns are more irregular in their endings, so this page won’t handle them correctly. This is true for 3rd-declension nouns with -im or -īs accusative forms (eg “<span lang="la">febris</span>”) and some Greek proper nouns (eg “<span lang="la">Ēchō</span>”), among others.
+            </p>
+            <p>
+                You should also be aware that this page generates singular and plural forms for all lemmata, but some nouns don’t exist in the singular or don’t make sense in the plural. For each adjective or adverb, comparative or superlative forms may be generated, but these aren’t always attested.
+            </p>
+            <h3>What I use this for</h3>
+            <p>
+                This webpage is convenient for me because much of the data for velut (my Latin dictionary) is generated by and stored in a large Excel file. For each word, I need to generate several values based off the word and the lemma (or lemmata) that the word belongs to. A sheet in my Excel file generates the values I need, based off whatever text is pasted into two of the columns (the “word” and “lemmata” columns).
+            </p>
+            <p>
+                Therefore, I can paste the output from this webpage into my Excel file, check everything is correct (it probably isn’t), and that’s how I generate everything velut needs for each word.
+            </p>
+            <h3>The de-Excellation of velut</h3>
+            <p>
+                The Excel file that stores, generates, and manages all the data for velut is very large and complex. This is a problem for several reasons — loading and saving the file takes a long time, occasionally it crashes and I lose work, I can’t choose to make some data or some functionality publicly visibly without making it all publicly visible…
+            </p>
+            <p>
+                That’s why I am in the process of reducing velut’s reliance on Excel, by re-creating all the functionality in the velut Excel file as webpages or websites and by exporting all the data to MongoDB databases or Json files to be used by the webpages/sites.
+            </p>
+            <p>
+                This webpage is a part of that, since it replaces an Excel sheet that was generating declined forms.
+            </p>
+            <p>
+                I have a similar Excel sheet that generates conjugated forms of verbs. I’m therefore planning to create a webpage similar to this one, but for conjugating verbs instead of declining nouns and adjectives.
+            </p>
+            <p>
+                As more and more of velut gets de-Excellated, further changes will be needed to this page. For now, it’s okay.
+            </p>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            <li>
+                <a href="https://www.duncanritchie.co.uk/" title="Duncan Ritchie’s website">Made by Duncan Ritchie</a>
+            </li>
+            <li>
+                <a href="https://github.com/DuncanRitchie/velut-decliner" title="Code for this page on GitHub">See the code</a>
+            </li>
+        </ul>
+    </footer>
+    <script src="./main.js"></script>
+</body>
+</html>
