@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Generates inflected forms of Latin nouns, adjectives, and adverbs.">
-    <title>Latin declensions for velut</title>
+    <meta name="description" content="Generates inflected forms of Latin verbs.">
+    <title>Latin conjugations for velut</title>
     <link rel="shortcut icon" href="https://www.duncanritchie.co.uk/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/main.css">
     <link rel="stylesheet" href="https://www.duncanritchie.co.uk/velut-json-generator/main.css">
@@ -12,16 +12,16 @@
 </head>
 <body>
     <main>
-        <h1>Duncan’s Latin declensions for velut</h1>
+        <h1>Duncan’s Latin conjugations for velut</h1>
         <div>
             <button id="clear-inputs">Clear</button>
             <button id="load-sample-data">Load sample</button>
         </div>
-        <label for="textarea-input">Enter Latin nouns/adjectives/adverbs here (or use sample):</label><br/>
+        <label for="textarea-input">Enter Latin verbs here (or use sample):</label><br/>
         <textarea id="textarea-input" lang="la"></textarea><br/>
         <div>
-            <span id="text-by-select-declensions"></span>
-            <button id="generate-select-declensions-table">Start choosing declensions</button>
+            <span id="text-by-select-conjugations"></span>
+            <button id="generate-select-conjugations-table">Start choosing conjugations</button>
         </div>
         <p>
             <span id="text-before-table"></span>
@@ -32,11 +32,11 @@
                 <!-- <tr>
                     <td lang="la">puella</td>
                     <td>
-                        <input id="declension-input-puella" list="declension-descriptions" value="1st, noun, Latin-style"/>
+                        <input id="conjugation-input-puella" list="conjugation-descriptions" value="1st, noun, Latin-style"/>
                     </td>
                 </tr> -->
             </tbody>
-            <datalist id="declension-descriptions">
+            <datalist id="conjugation-descriptions">
                 <!-- Generated options look like this: -->
                 <!-- <option value="1st, noun, Latin-style"/>
                 <option value="1st, noun, Greek-style"/>
@@ -65,7 +65,7 @@
             <label for="output-lemma">Output lemma with each form?</label>
         </div>
         <div>
-            <button id="decline">Decline</button><br/>
+            <button id="conjugate">Conjugate</button><br/>
         </div>
         <label for="textarea-output">Output forms:</label><br/>
         <textarea id="textarea-output" lang="la" readonly></textarea>
@@ -84,64 +84,39 @@
             </p>
             <h3>Note on the word “lemma”</h3>
             <p>
-                The lemma of a word is the form given as the headword in dictionaries; for nouns it’s usually the nominative singular.
+                The lemma of a word is the form given as the headword in dictionaries; for verbs it’s usually the 1st-person singular present active indicative.
             </p>
             <h3>How to use</h3>
             <p>
-                Enter the lemmata of Latin nouns/adjectives/adverbs into the first input box. These can be separated by spaces, line-breaks, commas, or semicolons. I provide some sample words that you can load if you want.
+                Enter the three or four principal parts of Latin verbs into the first input box. These can be separated by spaces or commas. Sets of principal parts should be separated by semicolons or line-breaks. (For example: “<span lang="la">amō amāre amāvī amātum; doceō docēre docuī doctum; loquor loquī locūtum</span>”.) I provide some sample words that you can load if you want.
             </p>
             <p>
-                For words of the third declension, please enter both the nominative singular and the genitive singular, separated by a slash, eg “<span lang="la">amor/amōris</span>”. (But if the nominative singular is the same as the genitive singular, with or without the -is ending, it’s fine to just give the nominative singular, eg “<span lang="la">avis</span>” and “<span lang="la">cōnsul</span>” will yield the same output as “<span lang="la">avis/avis</span>” and “<span lang="la">cōnsul/cōnsulis</span>”.)
+                Then, click the “Start choosing conjugations” button. A table will appear listing every word you put in, alongside a conjugation — such as “1st, -āvī perfect, non-deponent” — that has been automatically determined for each word.
             </p>
             <p>
-                This trick (of supplying the genitive singular after a slash) also works for fourth declension nouns with nominative singular -us, so you can type either “<span lang="la">manus</span>” or “<span lang="la">manus/manūs</span>”.
+                This page determines the conjugation based on the final letters of the word, so is frequently wrong. You can, however, edit the conjugation, by deleting the incorrect text and choosing a different conjugation from the list that appears.
             </p>
             <p>
-                Then, click the “Start choosing declensions” button. A table will appear listing every word you put in, alongside a declension — such as “3rd, noun, consonant stem” — that has been automatically determined for each word.
-            </p>
-            <p>
-                This page determines the declension based on the final letters of the word, so is frequently wrong. You can, however, edit the declension, by deleting the incorrect text and choosing a different declension from the list that appears.
-            </p>
-            <p>
-                Once you are happy with the table of lemmata and declensions, click “Decline”. A list of all the forms will appear in the box underneath. Forms that are stressed on the ending may appear if the “Include stressed endings” tickbox is ticked. The lemma that each form came from may appear beside each lemma (separated by a tab), depending on whether the “Output lemma” tickbox is ticked.
+                Once you are happy with the table of lemmata and conjugations, click “Conjugate”. A list of all the forms will appear in the box underneath. Forms that are stressed on the ending may appear if the “Include stressed endings” tickbox is ticked. The lemma that each form came from may appear beside each lemma (separated by a tab), depending on whether the “Output lemma” tickbox is ticked.
             </p>
             <p>
                 Finally, you can click the “Copy to clipboard” button.
             </p>
-            <h3>Brackets in input</h3>
-            <p>
-                In the input, you can include one of the following abbreviations in brackets after any word: “adj”, “adv”, “n”, or “prn”. These stand for “adjective”, “adverb”, “(non-proper) noun”, and “proper noun”, respectively.
-            </p>
-            <p>
-                This page takes the abbreviation into account when automatically assigning a declension to the word, though they are optional.
-            </p>
-            <p>
-                Marking a word as a proper noun has the same effect on which declension is automatically assigned as marking it as a non-proper noun. “<span lang="la">Deus[prn]</span>” and “<span lang="la">deus[n]</span>” will both be assigned “2nd, noun, masculine/feminine, -us”, for instance.
-            </p>
-            <p>
-                If square brackets are used, the abbreviation will appear in the final output with the lemma, if the “Output lemmata?” tickbox is ticked.
-            </p>
-            <p>
-                If round brackets are used, the abbreviation will not appear in the output.
-            </p>
             <h3>Caveats</h3>
             <p>
-                Please note: you need to look over all the declined forms that have been generated, because this webpage is quite rudimentary and not every inflection makes sense for every lemma.
+                Please note: you need to look over all the conjugated forms that have been generated, because this webpage is quite rudimentary and not every inflection makes sense for every lemma.
             </p>
             <p>
                 Also, this page assumes you’re capable of entering letters with macra (the diacritics on ĀĒĪŌŪȲāēīōūȳ) into the first input box.
             </p>
             <p>
-                If the lemma (or genitive singular) does not end with the letters this page expects, all the forms will probably be wrong.
+                If the input forms do not end with the letters this page expects, the output forms will probably be wrong.
             </p>
             <p>
-                For the third declension, and for fourth declension nouns with lemmata in -us, you can input the genitive singular after a slash and the output may be what you want. For fourth declension nouns with nominative singular -ū, and for the other declensions (1st/2nd/5th), please only supply the nominative singular. That is, “<span lang="la">amor/amōris</span>” and “<span lang="la">manus/manūs</span>” will yield the correct output (even if you don’t manually change the declension in the table), but “<span lang="la">terra/terrae</span>”, “<span lang="la">corvus/corvī</span>”, “<span lang="la">cornū/cornūs</span>” will not.
+                Some Latin verbs are more irregular in their endings, so this page won’t handle them correctly.
             </p>
             <p>
-                Some Latin nouns are more irregular in their endings, so this page won’t handle them correctly. This is true for 3rd-declension nouns with -im or -īs accusative forms (eg “<span lang="la">febris</span>”) and some Greek proper nouns (eg “<span lang="la">Ēchō</span>”), among others.
-            </p>
-            <p>
-                You should also be aware that this page generates singular and plural forms for all lemmata, but some nouns don’t exist in the singular or don’t make sense in the plural. For each adjective or adverb, comparative or superlative forms may be generated, but these aren’t always attested.
+                You should also be aware that this page may generate forms that are not attested for the verb: for instance, this page generates passive forms for all non-deponent verbs, but some verbs don’t exist in the passive.
             </p>
             <h3>What I use this for</h3>
             <p>
@@ -158,10 +133,10 @@
                 That’s why I am in the process of reducing velut’s reliance on Excel, by re-creating all the functionality in the velut Excel file as webpages or websites and by exporting all the data to MongoDB databases or Json files to be used by the webpages/sites.
             </p>
             <p>
-                This webpage is a part of that, since it replaces an Excel sheet that was generating declined forms.
+                This webpage is a part of that, since it replaces an Excel sheet that was generating conjugated forms.
             </p>
             <p>
-                I have a similar Excel sheet that generates conjugated forms of verbs. I’m therefore planning to create a webpage similar to this one, but for conjugating verbs instead of declining nouns and adjectives.
+                I had a similar Excel sheet that generated declined forms of nouns, adjectives, and adverbs. I have replaced it with a <a href="https://velut-decliner.netlify.app/" title="Duncan’s Latin declensions for velut">webpage</a> similar to this one, but for declensions.
             </p>
             <p>
                 As more and more of velut gets de-Excellated, further changes will be needed to this page. For now, it’s okay.
@@ -174,7 +149,7 @@
                 <a href="https://www.duncanritchie.co.uk/" title="Duncan Ritchie’s website">Made by Duncan Ritchie</a>
             </li>
             <li>
-                <a href="https://github.com/DuncanRitchie/velut-decliner" title="Code for this page on GitHub">See the code</a>
+                <a href="https://github.com/DuncanRitchie/velut-conjugator" title="Code for this page on GitHub">See the code</a>
             </li>
         </ul>
     </footer>

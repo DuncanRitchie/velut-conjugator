@@ -1,22 +1,22 @@
 const buttonClearInputs = document.getElementById("clear-inputs");
 const buttonLoadSampleData = document.getElementById("load-sample-data");
 const textareaInput = document.getElementById("textarea-input");
-const buttonGenerateSelectDeclensionsTable = document.getElementById("generate-select-declensions-table");
+const buttonGenerateSelectConjugationsTable = document.getElementById("generate-select-conjugations-table");
 const textBeforeTable = document.getElementById("text-before-table");
 const tbody = document.getElementById("tbody");
-const declensionsDataList = document.getElementById("declension-descriptions");
-const textBySelectDeclensions = document.getElementById("text-by-select-declensions");
+const conjugationsDataList = document.getElementById("conjugation-descriptions");
+const textBySelectConjugations = document.getElementById("text-by-select-conjugations");
 const tickboxIncludeStressedEndings = document.getElementById("include-stressed-endings");
 const tickboxCombineLemmata = document.getElementById("combine-lemmata");
 const tickboxOutputLemma = document.getElementById("output-lemma");
-const buttonDecline = document.getElementById("decline");
+const buttonConjugate = document.getElementById("conjugate");
 const textareaOutput = document.getElementById("textarea-output");
 const textByCopyToClipboard = document.getElementById("text-by-copy-to-clipboard");
 const buttonCopyToClipboard = document.getElementById("copy-to-clipboard");
 
 const sampleData = "terra Ariadnē corvus cerebrum fīlius officium puer(n) avis cōnsul amor/amōris genus/generis animal/animālis manus/manūs cornū diēs probus(adj) signifer[n] signifer[adj] tenāx/tenācis(adj) probē(adv) tenāciter cōnstanter libenter";
 
-//// "Parts of speech" may optionally appear in lemmata on velut in square brackets (eg ‘amīcus[n]’ is a noun & ‘amīcus[adj]’ is an adjective); "adv" means adverb and "prn" means proper noun (which has the same declensions as noun).
+//// "Parts of speech" may optionally appear in lemmata on velut in square brackets (eg ‘amīcus[n]’ is a noun & ‘amīcus[adj]’ is an adjective); "adv" means adverb and "prn" means proper noun (which has the same conjugations as noun).
 //// "Principal part ending" is the ending that will trigger the schema being automatically assigned for a lemma.
 const schemata = [
     {
@@ -216,9 +216,9 @@ const getSchemaDescriptionForPrincipalParts = (principalParts) => {
     return find?.Description ?? "3rd, noun, masculine/feminine, consonant stem";
 }
 
-const getSchemaFromDescription = (declensionDescription) => {
+const getSchemaFromDescription = (conjugationDescription) => {
     for (let i = 0; i < schemata.length; i++) {
-        if (schemata[i].Description === declensionDescription) {
+        if (schemata[i].Description === conjugationDescription) {
             return schemata[i];
         }
     }
@@ -298,7 +298,7 @@ const getStemFromPrincipalParts = (principalParts, principalPartEnding) => {
         output = output.substr(0, output.length - principalPartEnding.length);
     }
 
-    //// Handle 4th declension nouns in -us/-ūs correctly.
+    //// Handle 4th conjugation nouns in -us/-ūs correctly.
     else if (principalPartEnding === "ūs" && output.endsWith("us")) {
         return output.substr(0, output.length - 2);
     }
@@ -331,11 +331,11 @@ const getPrincipalPartsFromInput = () => {
 }
 
 const refreshDataList = () => {
-    declensionsDataList.innerHTML = "";
+    conjugationsDataList.innerHTML = "";
     getDescriptionsFromSchemata().map(description => {
         const newOption = document.createElement("option");
         newOption.value = description;
-        declensionsDataList.append(newOption);
+        conjugationsDataList.append(newOption);
     });
 }
 
@@ -347,12 +347,12 @@ const clearInputs = () => {
     clearTextMessages();
 }
 
-const generateSelectDeclensionsTable = () => {
+const generateSelectConjugationsTable = () => {
     const principalPartsArray = getPrincipalPartsFromInput();
 
     let innerHtml = "";
     principalPartsArray.map(principalPart => {
-        const declensionDescription = getSchemaDescriptionForPrincipalParts(principalPart);
+        const conjugationDescription = getSchemaDescriptionForPrincipalParts(principalPart);
 
         innerHtml = `${innerHtml}
         <tr>
@@ -360,13 +360,13 @@ const generateSelectDeclensionsTable = () => {
         ${principalPart}
         </td>
         <td>
-        <input id="declension-input-${principalPart}" list="declension-descriptions" value="${declensionDescription}"/>
+        <input id="conjugation-input-${principalPart}" list="conjugation-descriptions" value="${conjugationDescription}"/>
         </td>
         </tr>`;
     });
 
     tbody.innerHTML = innerHtml;
-    announceDeclensionsTable();
+    announceConjugationsTable();
 }
 
 //// Removes duplicates from an array of objects, assuming each object has a Form and a Lemma string field.
@@ -429,7 +429,7 @@ const convertFormLemmaObjectsToFormLemmataObjects = (arrayOfFormObjects) => {
 }
 
 //// Input should be an array of objects like {Form: "a", Lemmata: ["b", "c"]}
-const displayDeclinedOutput = (arrayOfFormObjects) => {
+const displayConjugatedOutput = (arrayOfFormObjects) => {
     const getDisplayString = tickboxOutputLemma.checked
                             ? object => `${object.Form}\t${object.Lemmata.join(" ")}`
                             : object => `${object.Form}`;
@@ -439,66 +439,66 @@ const displayDeclinedOutput = (arrayOfFormObjects) => {
         .join("\n");
 }
 
-const decline = () => {
+const conjugate = () => {
     const countLemmata = tbody.children.length;
     const includeStressedEndings = tickboxIncludeStressedEndings.checked;
-    let declinedForms = [];
-    const pushToDeclinedForms = (form, lemma) => {
-        declinedForms.push({Form: form, Lemma: lemma});
+    let conjugatedForms = [];
+    const pushToConjugatedForms = (form, lemma) => {
+        conjugatedForms.push({Form: form, Lemma: lemma});
     }
 
     for (let i = 0; i < countLemmata; i++) {
         const principalParts = tbody.children[i].children[0].textContent.trim();
-        const declensionDescription = tbody.children[i].children[1].children[0].value;
-        const schema = getSchemaFromDescription(declensionDescription);
+        const conjugationDescription = tbody.children[i].children[1].children[0].value;
+        const schema = getSchemaFromDescription(conjugationDescription);
         const stem = getStemFromPrincipalParts(principalParts, schema["Principal part ending"]);
         const lemma = getLemmaFromPrincipalParts(principalParts);
 
         schema["Unstressed endings"].map(ending => {
-            //// If `ending` is the empty string, we are looking at the lemma of the 3rd declension.
+            //// If `ending` is the empty string, we are looking at the lemma of the 3rd conjugation.
             //// If the lemma is the same as the genitive singular (eg “avis”) we don’t push it as a form, to avoid duplicates.
             //// If the lemma is different to the genitive singular (eg “rēx/rēgis” or “genus/generis”), we push the lemma.
             if (ending === "") {
                 if (lemma !== `${stem}is`) {
-                    pushToDeclinedForms(lemma, lemma);
+                    pushToConjugatedForms(lemma, lemma);
                 }
             }
             else {
                 const form = `${stem}${ending}`;
-                pushToDeclinedForms(form, lemma);
+                pushToConjugatedForms(form, lemma);
             }
         })
 
         if (includeStressedEndings) {
             schema["Stressed endings"].map(ending => {
                 const form = `${stem}${ending}`;
-                pushToDeclinedForms(form, lemma);
+                pushToConjugatedForms(form, lemma);
             })
         }
     }
 
-    //console.log("declinedForms", declinedForms);
-    const noDuplicates = removeDuplicateFormLemmaObjects(declinedForms);
+    //console.log("conjugatedForms", conjugatedForms);
+    const noDuplicates = removeDuplicateFormLemmaObjects(conjugatedForms);
 
     const objectsWithLemmataArrays = tickboxCombineLemmata.checked
                                     ? generateFormObjectsWithLemmataArrays(noDuplicates)
                                     : convertFormLemmaObjectsToFormLemmataObjects(noDuplicates);
-    displayDeclinedOutput(objectsWithLemmataArrays);
+    displayConjugatedOutput(objectsWithLemmataArrays);
 }
 
 const clearTextMessages = () => {
-    textBySelectDeclensions.textContent = "";
+    textBySelectConjugations.textContent = "";
     textByCopyToClipboard.textContent = "";
 }
 
-const announceDeclensionsTable = () => {
+const announceConjugationsTable = () => {
     clearTextMessages();
-    textBeforeTable.textContent = "The table below describes how this page will decline your words. You can edit the right-hand column before clicking “Decline”.";
+    textBeforeTable.textContent = "The table below describes how this page will conjugate your words. You can edit the right-hand column before clicking “Conjugate”.";
 }
 
 const warnOfEmptyInput = () => {
     clearTextMessages();
-    textBySelectDeclensions.textContent = "Nothing to decline!";
+    textBySelectConjugations.textContent = "Nothing to conjugate!";
 }
 
 const warnOfEmptyOutput = () => {
@@ -528,23 +528,23 @@ buttonLoadSampleData.addEventListener("click", ()=>{
     clearTextMessages();
 });
 
-buttonGenerateSelectDeclensionsTable.addEventListener("click", () => {
+buttonGenerateSelectConjugationsTable.addEventListener("click", () => {
     if (textareaInput.value === "") {
         warnOfEmptyInput();
     }
     else {
         clearTextMessages();
-        generateSelectDeclensionsTable();
+        generateSelectConjugationsTable();
     }
 });
 
-buttonDecline.addEventListener("click", () => {
+buttonConjugate.addEventListener("click", () => {
     if (textareaInput.value === "" || tbody.children.length === 0) {
         warnOfEmptyInput();
     }
     else {
         clearTextMessages();
-        decline()
+        conjugate()
     };
 });
 
