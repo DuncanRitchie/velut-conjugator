@@ -372,9 +372,29 @@ const conjugate = () => {
             pushToConjugatedForms(form, lemma);
         })
 
+        schema["Unstressed endings"]["Perfect stem"].map(ending => {
+            const form = `${stems[2]}${ending}`;
+            pushToConjugatedForms(form, lemma);
+        })
+
+        schema["Unstressed endings"]["Supine stem"].map(ending => {
+            const form = `${stems[3]}${ending}`;
+            pushToConjugatedForms(form, lemma);
+        })
+
         if (includeStressedEndings) {
-            schema["Stressed endings"].map(ending => {
-                const form = `${stems}${ending}`;
+            schema["Stressed endings"]["Present stem"].map(ending => {
+                const form = `${stems[0]}${ending}`;
+                pushToConjugatedForms(form, lemma);
+            })
+    
+            schema["Stressed endings"]["Perfect stem"].map(ending => {
+                const form = `${stems[2]}${ending}`;
+                pushToConjugatedForms(form, lemma);
+            })
+    
+            schema["Stressed endings"]["Supine stem"].map(ending => {
+                const form = `${stems[3]}${ending}`;
                 pushToConjugatedForms(form, lemma);
             })
         }
