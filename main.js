@@ -29,7 +29,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "āre",
+        "Principal part endings": ["ō","āre","āvī","ātum"],
     },
     {
         "Description":           "2nd, non-deponent",
@@ -43,7 +43,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "ēre",
+        "Principal part endings": ["eō","ēre","ēvī","ētum"],
     },
     {
         "Description":           "3rd, non-deponent",
@@ -57,7 +57,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "ere",
+        "Principal part endings": ["ō","ere","ī","um"],
     },
     {
         "Description":           "4th, non-deponent",
@@ -71,7 +71,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "īre",
+        "Principal part endings": ["iō","īre","īvī","ītum"],
     },
     {
         "Description":           "1st, deponent",
@@ -85,12 +85,12 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "ārī",
+        "Principal part endings": ["or","ārī","ātum"],
     },
     {
         "Description":           "2nd, deponent",
         "Unstressed endings":    {
-            "Present stem":      ["eō","ēs","et","ent","ē","ēns"],
+            "Present stem":      ["eor","ēns"],
             "Perfect stem":      [],
             "Supine stem":       [],
         },
@@ -99,7 +99,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "ērī",
+        "Principal part endings": ["eor","ērī","ētum"],
     },
     {
         "Description":           "4th, deponent",
@@ -113,7 +113,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "īrī",
+        "Principal part endings": ["iōr","īrī","ītum"],
     },
     {
         "Description":           "3rd, deponent",
@@ -127,7 +127,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "ī",
+        "Principal part endings": ["or","ī","um"],
     },
     {
         "Description":           "",
@@ -141,7 +141,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "",
+        "Principal part endings": [],
     },
     {
         "Description":           "",
@@ -155,7 +155,7 @@ const schemata = [
             "Perfect stem":      [],
             "Supine stem":       [],
         },
-        "Infinitive ending":     "",
+        "Principal part endings": [],
     },
 ]
 
@@ -167,7 +167,7 @@ const getDescriptionsFromSchemata = () => {
 
 const getSchemaDescriptionForPrincipalParts = (principalParts) => {
     const find = schemata.find(schema => {
-        return principalParts[1].endsWith(schema["Infinitive ending"]);
+        return principalParts[1].endsWith(schema["Principal part endings"][1]);
     })
 
     return find?.Description ?? "1st, -āvī perfect";
@@ -204,37 +204,17 @@ const getSubstringAfterTerminator = (string, terminator) => {
     return string.substr(string.indexOf(terminator) + 1);
 }
 
-//// ("amor/amōris", "is") => "amōr"
-//// ("cōnsul", "is") => "cōnsul"
-//// ("avis", "is") => "av"
-//// ("hiātus", "ūs") => "hiāt"
-const getStemFromPrincipalParts = (principalParts, principalPartEnding) => {
-    let output = principalParts;
-
-    // //// If `output` contains a slash, remove anything up to it.
-    // output = getSubstringAfterTerminator(output, "/");
-
-    // //// If `output` ends with the ending, remove the ending.
-    // if (output.endsWith(principalPartEnding)) {
-    //     output = output.substr(0, output.length - principalPartEnding.length);
-    // }
-
-    // //// Handle 4th conjugation nouns in -us/-ūs correctly.
-    // else if (principalPartEnding === "ūs" && output.endsWith("us")) {
-    //     return output.substr(0, output.length - 2);
-    // }
+const getStemsFromPrincipalParts = (principalParts, principalPartEndings) => {
+    let output = [];
+    for (let i = 0; i < principalParts.length; i++) {
+        output.push(principalParts[i].substr(0, principalParts[i].length - principalPartEndings[i].length))
+    }
     return output;
 }
 
-//// "amor/amōris" => "amor"
-//// "cōnsul" => "cōnsul"
-//// "avis" => "avis"
+//// Assumes the first principal part is the lemma.
 const getLemmaFromPrincipalParts = (principalParts) => {
-    let output = principalParts;
-    //// If `principalParts` contains a slash, the lemma is anything up to it.
-    output = getSubstringBeforeSlash(output);
-    //// Otherwise, the lemma is the entirity of `principalParts`.
-    return output;
+    return principalParts[0];
 }
 
 //// Eg ("amō amāre, amāvī ,amātum") => ["amō","amāre","amāvī","amātum"]
@@ -376,30 +356,25 @@ const conjugate = () => {
     }
 
     for (let i = 0; i < countLemmata; i++) {
-        const principalParts = tbody.children[i].children[0].textContent.trim();
+        const principalParts = tbody.children[i].children[0].textContent.trim().split(", ");
+        console.log("principalParts", principalParts);
         const conjugationDescription = tbody.children[i].children[1].children[0].value;
+        console.log("conjugationDescription", conjugationDescription);
         const schema = getSchemaFromDescription(conjugationDescription);
-        const stem = getStemFromPrincipalParts(principalParts, schema["Principal part ending"]);
-        const lemma = getLemmaFromPrincipalParts(principalParts);
+        console.log("schema", schema);
+        const stems = getStemsFromPrincipalParts(principalParts, schema["Principal part endings"]);
+        console.log("stems", stems);
+        lemma = getLemmaFromPrincipalParts(principalParts);
+        console.log("lemma", lemma);
 
-        schema["Unstressed endings"].map(ending => {
-            //// If `ending` is the empty string, we are looking at the lemma of the 3rd conjugation.
-            //// If the lemma is the same as the genitive singular (eg “avis”) we don’t push it as a form, to avoid duplicates.
-            //// If the lemma is different to the genitive singular (eg “rēx/rēgis” or “genus/generis”), we push the lemma.
-            if (ending === "") {
-                if (lemma !== `${stem}is`) {
-                    pushToConjugatedForms(lemma, lemma);
-                }
-            }
-            else {
-                const form = `${stem}${ending}`;
-                pushToConjugatedForms(form, lemma);
-            }
+        schema["Unstressed endings"]["Present stem"].map(ending => {
+            const form = `${stems[0]}${ending}`;
+            pushToConjugatedForms(form, lemma);
         })
 
         if (includeStressedEndings) {
             schema["Stressed endings"].map(ending => {
-                const form = `${stem}${ending}`;
+                const form = `${stems}${ending}`;
                 pushToConjugatedForms(form, lemma);
             })
         }
