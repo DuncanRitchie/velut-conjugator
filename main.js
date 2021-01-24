@@ -147,7 +147,7 @@ const getDescriptionsFromSchemata = () => {
 
 const getSchemaDescriptionForPrincipalParts = (principalParts) => {
     const find = schemata.find(schema => {
-        return principalParts.endsWith(schema["Principal part ending"]);
+        return principalParts[1].endsWith(schema["Principal part ending"]);
     })
 
     return find?.Description ?? "1st, -āvī perfect";
@@ -191,18 +191,18 @@ const getSubstringAfterTerminator = (string, terminator) => {
 const getStemFromPrincipalParts = (principalParts, principalPartEnding) => {
     let output = principalParts;
 
-    //// If `output` contains a slash, remove anything up to it.
-    output = getSubstringAfterTerminator(output, "/");
+    // //// If `output` contains a slash, remove anything up to it.
+    // output = getSubstringAfterTerminator(output, "/");
 
-    //// If `output` ends with the ending, remove the ending.
-    if (output.endsWith(principalPartEnding)) {
-        output = output.substr(0, output.length - principalPartEnding.length);
-    }
+    // //// If `output` ends with the ending, remove the ending.
+    // if (output.endsWith(principalPartEnding)) {
+    //     output = output.substr(0, output.length - principalPartEnding.length);
+    // }
 
-    //// Handle 4th conjugation nouns in -us/-ūs correctly.
-    else if (principalPartEnding === "ūs" && output.endsWith("us")) {
-        return output.substr(0, output.length - 2);
-    }
+    // //// Handle 4th conjugation nouns in -us/-ūs correctly.
+    // else if (principalPartEnding === "ūs" && output.endsWith("us")) {
+    //     return output.substr(0, output.length - 2);
+    // }
     return output;
 }
 
@@ -217,14 +217,23 @@ const getLemmaFromPrincipalParts = (principalParts) => {
     return output;
 }
 
+//// Eg ("amō amāre, amāvī ,amātum") => ["amō","amāre","amāvī","amātum"]
+const getPrincipalPartsFromOneVerbString = (partsAsString) => {
+    return partsAsString
+        .split(/[ ,\/]+/)
+        .filter(string => { return string !== ""; });
+}
+
+//// Returns an array of arrays, eg [["amō","amāre","amāvī","amātum"],["loquor","loquī","locūtum"]]
 const getPrincipalPartsFromInput = () => {
     if (!textareaInput.value) {
         return [];
     }
 
     const principalPartsArray = textareaInput.value
-        .split(/[\s,;\.]+/)
-        .filter(string => { return string !== ""; });
+        .split(/[\t;\.]+/)
+        .filter(string => { return string !== ""; })
+        .map(getPrincipalPartsFromOneVerbString);
     return principalPartsArray;
 }
 
