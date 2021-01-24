@@ -77,12 +77,10 @@ const schemata = [
         "Description":           "1st, deponent",
         "Unstressed endings":    {
             "Present stem":      ["or","er","āns"],
-            "Perfect stem":      [],
             "Supine stem":       [],
         },
         "Stressed endings":      {
             "Present stem":      [],
-            "Perfect stem":      [],
             "Supine stem":       [],
         },
         "Principal part endings": ["or","ārī","ātum"],
@@ -91,12 +89,10 @@ const schemata = [
         "Description":           "2nd, deponent",
         "Unstressed endings":    {
             "Present stem":      ["eor","ear","ēns"],
-            "Perfect stem":      [],
             "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
-            "Perfect stem":      [],
             "Supine stem":       [],
         },
         "Principal part endings": ["eor","ērī","um"],
@@ -105,12 +101,10 @@ const schemata = [
         "Description":           "4th, deponent",
         "Unstressed endings":    {
             "Present stem":      ["ior","iar","iēns"],
-            "Perfect stem":      [],
             "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
-            "Perfect stem":      [],
             "Supine stem":       [],
         },
         "Principal part endings": ["iōr","īrī","um"],
@@ -119,12 +113,10 @@ const schemata = [
         "Description":           "3rd, deponent",
         "Unstressed endings":    {
             "Present stem":      ["or","eris","ere","itur","imur","ar","erer","itor","ī","ēns"],
-            "Perfect stem":      [],
             "Supine stem":       ["um","ū","us","a","ī","ae","ō","īs","am","ōs","ās","ā","e"],
         },
         "Stressed endings":      {
             "Present stem":      [],
-            "Perfect stem":      [],
             "Supine stem":       [],
         },
         "Principal part endings": ["or","ī","um"],
