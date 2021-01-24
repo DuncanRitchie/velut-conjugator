@@ -232,7 +232,7 @@ const getPrincipalPartsFromInput = () => {
     }
 
     const principalPartsArray = textareaInput.value
-        .split(/[\t;\.]+/)
+        .split(/[\t\n\r;\.]+/)
         .filter(string => { return string !== ""; })
         .map(getPrincipalPartsFromOneVerbString);
     return principalPartsArray;
