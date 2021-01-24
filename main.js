@@ -16,176 +16,127 @@ const buttonCopyToClipboard = document.getElementById("copy-to-clipboard");
 
 const sampleData = "terra Ariadnē corvus cerebrum fīlius officium puer(n) avis cōnsul amor/amōris genus/generis animal/animālis manus/manūs cornū diēs probus(adj) signifer[n] signifer[adj] tenāx/tenācis(adj) probē(adv) tenāciter cōnstanter libenter";
 
-//// "Parts of speech" may optionally appear in lemmata on velut in square brackets (eg ‘amīcus[n]’ is a noun & ‘amīcus[adj]’ is an adjective); "adv" means adverb and "prn" means proper noun (which has the same conjugations as noun).
 //// "Principal part ending" is the ending that will trigger the schema being automatically assigned for a lemma.
 const schemata = [
     {
         "Description":           "1st, noun, Latin-style",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["a","ae","am","ā","ās","īs"],
         "Stressed endings":      ["ārum"],
-        "Principal part ending": "a",
     },
     {
         "Description":           "1st, noun, Greek-style",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["ē","ēs","ēn","ae","ās","īs"],
         "Stressed endings":      ["ārum"],
-        "Principal part ending": "ē",
     },
     {
         "Description":           "2nd, noun, masculine/feminine, -ius",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["ius","iī","ī","iō","ium","iōs","iīs"],
         "Stressed endings":      ["iōrum"],
-        "Principal part ending": "ius",
     },
     {
         "Description":           "2nd, noun, masculine/feminine, -us",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["us","ī","e","ō","um","ōs","īs"],
         "Stressed endings":      ["ōrum"],
-        "Principal part ending": "us",
     },
     {
         "Description":           "2nd, noun, neuter, -ium",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["ium","iī","ī","iō","ium","ia","iīs"],
         "Stressed endings":      ["iōrum"],
-        "Principal part ending": "ium",
     },
     {
         "Description":           "2nd, noun, neuter, -um",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["um","ī","ō","um","a","īs"],
         "Stressed endings":      ["ōrum"],
-        "Principal part ending": "um",
     },
     {
         "Description":           "3rd, noun, masculine/feminine, consonant stem",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["","is","em","ī","e","ēs","um","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "is",
     },
     {
         "Description":           "3rd, noun, masculine/feminine, -i stem",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["","is","em","ī","ēs","ium","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "is",
     },
     {
         "Description":           "3rd, noun, neuter, consonant stem",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["","is","ī","a","um","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "is",
     },
     {
         "Description":           "3rd, noun, neuter, -i stem",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["","is","ī","ia","ium","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "is",
     },
     {
         "Description":           "4th, noun, -us nominative",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["us","ūs","um","uī","ū","uum","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "ūs",
     },
     {
         "Description":           "4th, noun, -ū nominative",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["ū","ūs","ua","uum","ibus"],
         "Stressed endings":      [],
-        "Principal part ending": "ū",
     },
     {
         "Description":           "5th, noun",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["ēs","em","ē"],
         "Stressed endings":      ["ēī","ērum","ēbus"],
-        "Principal part ending": "ēs",
     },
     {
         "Description":           "Adverb, -ē",
-        "Parts of speech":       ["adv"],
         "Unstressed endings":    ["ē","ius"],
         "Stressed endings":      ["issimē"],
-        "Principal part ending": "ē",
     },
     {
         "Description":           "Adverb, -iter",
-        "Parts of speech":       ["adv"],
         "Unstressed endings":    ["iter","ius"],
         "Stressed endings":      ["issimē"],
-        "Principal part ending": "iter",
     },
     {
         "Description":           "Adverb, -nter",
-        "Parts of speech":       ["adv"],
         "Unstressed endings":    ["nter","ntius"],
         "Stressed endings":      ["ntissimē"],
-        "Principal part ending": "nter",
     },
     {
         "Description":           "1st/2nd, adjective, -us",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["us","ī","e","ō","um","ōs","a","ae","am","ā","ās","īs","ior","ius"],
         "Stressed endings":      ["ārum","ōrum","iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
-        "Principal part ending": "us",
     },
     {
         "Description":           "1st/2nd, adjective, -er/erī",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["er","erī","ere","erō","erum","erōs","era","erae","eram","erā","erās","erīs"],
         "Stressed endings":      ["erārum","erōrum"],
-        "Principal part ending": "er",
     },
     {
         "Description":           "1st/2nd, adjective, -er/rī",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["er","rī","re","rō","rum","rōs","ra","rae","ram","rā","rās","rīs"],
         "Stressed endings":      ["rārum","rōrum"],
-        "Principal part ending": "er",
     },
     {
         "Description":           "3rd, adjective, -āns nominative singular",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["āns","antis","ante","antem","antī","antēs","antia","antium","antibus","antior","antius"],
         "Stressed endings":      ["antiōris","antiōrem","antiōrī","antiōre","antiōrēs","antiōrum","antiōribus","antissimus","antissimī","antissime","antissimō","antissimum","antissimōs","antissima","antissimae","antissimam","antissimā","antissimās","antissimīs","antissimārum","antissimōrum"],
-        "Principal part ending": "antis",
     },
     {
         "Description":           "3rd, adjective, -ēns nominative singular",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["ēns","entis","ente","entem","entī","entēs","entia","entium","entibus","entior","entius"],
         "Stressed endings":      ["entiōris","entiōrem","entiōrī","entiōre","entiōrēs","entiōrum","entiōribus","entissimus","entissimī","entissime","entissimō","entissimum","entissimōs","entissima","entissimae","entissimam","entissimā","entissimās","entissimīs","entissimārum","entissimōrum"],
-        "Principal part ending": "entis",
     },
     {
         "Description":           "3rd, adjective, one-form nominative singular",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["","is","em","ī","ēs","ia","ium","ibus","ior","ius"],
         "Stressed endings":      ["iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
-        "Principal part ending": "is",
     },
     {
         "Description":           "3rd, adjective, two-form nominative singular",
-        "Parts of speech":       ["adj"],
         "Unstressed endings":    ["","is","e","em","ī","ēs","ia","ium","ibus","ior","ius"],
         "Stressed endings":      ["iōris","iōrem","iōrī","iōre","iōrēs","iōrum","iōribus","issimus","issimī","issime","issimō","issimum","issimōs","issima","issimae","issimam","issimā","issimās","issimīs","issimārum","issimōrum"],
-        "Principal part ending": "is",
     },
     {
         "Description":           "2nd, noun, -er/-erī",
-        "Parts of speech":       ["n","prn"],
         "Unstressed endings":    ["er","erī","ere","erō","erum","erōs","erīs"],
         "Stressed endings":      ["erōrum"],
-        "Principal part ending": "er",
     },
 ]
 
@@ -196,24 +147,11 @@ const getDescriptionsFromSchemata = () => {
 }
 
 const getSchemaDescriptionForPrincipalParts = (principalParts) => {
-    // console.log("principalParts", principalParts);
-    const textInBrackets = getTextInBrackets(principalParts);
-    // console.log("textInBrackets", textInBrackets);
-    const withoutBrackets = getSubstringBeforeRoundBracket(getSubstringBeforeSquareBracket(principalParts));
-    // console.log("withoutBrackets", withoutBrackets);
-
-    const filteredSchemata = textInBrackets === ""
-                           ? schemata
-                           : schemata.filter(schema => {
-                               return schema["Parts of speech"].includes(textInBrackets);
-                            });
-    // console.log("filteredSchemata", filteredSchemata);
-
-    const find = filteredSchemata.find(schema => {
-        return withoutBrackets.endsWith(schema["Principal part ending"]);
+    const find = schemata.find(schema => {
+        return principalParts.endsWith(schema["Principal part ending"]);
     })
 
-    return find?.Description ?? "3rd, noun, masculine/feminine, consonant stem";
+    return find?.Description ?? "1st, -āvī perfect";
 }
 
 const getSchemaFromDescription = (conjugationDescription) => {
@@ -239,44 +177,12 @@ const getSubstringBeforeSlash = (string) => {
     return getSubstringBeforeTerminator(string, "/");
 }
 
-const getSubstringBeforeSquareBracket = (string) => {
-    return getSubstringBeforeTerminator(string, "[");
-}
-
-const getSubstringBeforeRoundBracket = (string) => {
-    return getSubstringBeforeTerminator(string, "(");
-}
-
 //// Removes any instance of `terminator` and any characters before it from `string`.
 //// Eg, ("Duncan Ritchie is a software dev"," ") => "dev"
 //// Eg, ("Duncan Ritchie"," ") => "Ritchie"
 //// Eg, ("velut"," ") => "velut"
 const getSubstringAfterTerminator = (string, terminator) => {
     return string.substr(string.indexOf(terminator) + 1);
-}
-
-//// Eg, "probē(adv)" => "adv"
-//// Eg, "amīcus[adj]" => "adj"
-//// Eg, "tenāciter" => ""
-const getTextInBrackets = (inputString) => {
-    //// Return the empty string if input doesn’t contain brackets.
-    if (!inputString.includes("[")
-     && !inputString.includes("(")) {
-        return "";
-    }
-    //// Otherwise, we remove text before and after brackets.
-    let output = inputString;
-
-    if (output.includes("[")) {
-        output = output.substr(output.indexOf("[") + 1);
-        output = getSubstringBeforeTerminator(output, "]");
-    }
-    else if (output.includes("(")) {
-        output = output.substr(output.indexOf("(") + 1);
-        output = getSubstringBeforeTerminator(output, ")");
-    }
-
-    return output;
 }
 
 //// ("amor/amōris", "is") => "amōr"
@@ -288,10 +194,6 @@ const getStemFromPrincipalParts = (principalParts, principalPartEnding) => {
 
     //// If `output` contains a slash, remove anything up to it.
     output = getSubstringAfterTerminator(output, "/");
-
-    //// If either parameter contains an opening square or round bracket, remove it and anything after it.
-    output = getSubstringBeforeSquareBracket(output);
-    output = getSubstringBeforeRoundBracket(output);
 
     //// If `output` ends with the ending, remove the ending.
     if (output.endsWith(principalPartEnding)) {
@@ -308,13 +210,10 @@ const getStemFromPrincipalParts = (principalParts, principalPartEnding) => {
 //// "amor/amōris" => "amor"
 //// "cōnsul" => "cōnsul"
 //// "avis" => "avis"
-//// "probus[adj]" => "probus"
-//// "tenāx/tenācis[adj]" => "tenāx"
 const getLemmaFromPrincipalParts = (principalParts) => {
     let output = principalParts;
-    //// If `principalParts` contains a slash or opening round bracket, the lemma is anything up to it.
+    //// If `principalParts` contains a slash, the lemma is anything up to it.
     output = getSubstringBeforeSlash(output);
-    output = getSubstringBeforeRoundBracket(output);
     //// Otherwise, the lemma is the entirity of `principalParts`.
     return output;
 }
