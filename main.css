@@ -2,6 +2,10 @@ textarea {
     min-height: 12em;
 }
 
+div {
+    text-align: right;
+}
+
 h1 ~ h2 {
     text-align: left;
     font-size: 1.25rem;
@@ -29,6 +33,10 @@ td input {
 #tickboxes-wrapper {
     display: flex;
     flex-wrap: wrap;
+}
+
+#tickboxes-wrapper div {
+    min-height: 2rem;
 }
 
 input[type="checkbox"] {
