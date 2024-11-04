@@ -1,5 +1,5 @@
 # Latin conjugations for velut (obsolete)
-[velut-conjugator.netlify.app](https://velut-conjugator.netlify.app)
+[www.duncanritchie.co.uk/www.duncanritchie.co.uk/velut-conjugator](https://velut-conjugator)
 
 Webpage that generates inflected forms of Latin verbs.
 Superseded by my [Inflector](https://github.com/DuncanRitchie/velut-inflector).
@@ -11,7 +11,7 @@ It fits better into the architecture for [velut — my Latin vocabulary website]
 
 If you’re interested in Latin vocabulary though, you should definitely take a look at velut (here’s the [velut website](https://www.velut.co.uk)). This conjugations webpage exists because I review all words before adding them to velut, and this process was made faster by generating forms using this webpage. But now I use the Inflector.
 
-More details are in the “[About](https://velut-conjugator.netlify.app/#about)” section of the page.
+More details are in the “[About](https://www.duncanritchie.co.uk/velut-conjugator/#about)” section of the page.
 
 For a similar (and also obsolete) webpage dealing with nouns, adjectives, and adverbs, see [Latin declensions for velut](https://github.com/DuncanRitchie/velut-decliner).
 
