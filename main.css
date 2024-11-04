@@ -2,7 +2,7 @@ textarea {
     min-height: 12em;
 }
 
-div {
+div:not(section div) {
     text-align: right;
 }
 
