@@ -1,5 +1,5 @@
 # Latin conjugations for velut (obsolete)
-[www.duncanritchie.co.uk/www.duncanritchie.co.uk/velut-conjugator](https://velut-conjugator)
+[www.duncanritchie.co.uk/velut-conjugator](https://www.duncanritchie.co.uk/velut-conjugator)
 
 Webpage that generates inflected forms of Latin verbs.
 Superseded by my [Inflector](https://github.com/DuncanRitchie/velut-inflector).
