@@ -1,36 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Generates inflected forms of Latin verbs.">
-    <title>Latin conjugations for velut</title>
-    <link rel="shortcut icon" href="https://www.duncanritchie.co.uk/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/main.css" key="main">
-    <link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/subsites.css" key="subsites">
-    <link rel="stylesheet" href="https://fonts.duncanritchie.co.uk/subsites.css" key="fonts">
-    <link rel="stylesheet" href="./main.css" key="subsite">
-</head>
-<body>
-    <main>
-        <h1>Duncan’s Latin conjugations for velut</h1>
-        <div>
-            <button id="clear-inputs">Clear</button>
-            <button id="load-sample-data">Load sample</button>
-        </div>
-        <label for="textarea-input">Enter Latin verbs here (or use sample):</label><br/>
-        <textarea id="textarea-input" lang="la"></textarea><br/>
-        <div>
-            <span id="text-by-select-conjugations"></span>
-            <button id="generate-select-conjugations-table">Start choosing conjugations</button>
-        </div>
-        <p>
-            <span id="text-before-table"></span>
-        </p>
-        <table>
-            <tbody id="tbody">
-                <!-- Generated rows look like this: -->
-                <!-- <tr>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Generates inflected forms of Latin verbs." />
+		<title>Latin conjugations for velut</title>
+		<link rel="shortcut icon" href="https://www.duncanritchie.co.uk/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/main.css" key="main" />
+		<link rel="stylesheet" href="https://www.duncanritchie.co.uk/css/subsites.css" key="subsites" />
+		<link rel="stylesheet" href="https://fonts.duncanritchie.co.uk/subsites.css" key="fonts" />
+		<link rel="stylesheet" href="./main.css" key="subsite" />
+	</head>
+	<body>
+		<main>
+			<h1>Duncan’s Latin conjugations for velut</h1>
+			<div>
+				<button id="clear-inputs">Clear</button>
+				<button id="load-sample-data">Load sample</button>
+			</div>
+			<label for="textarea-input">Enter Latin verbs here (or use sample):</label><br />
+			<textarea id="textarea-input" lang="la"></textarea><br />
+			<div>
+				<span id="text-by-select-conjugations"></span>
+				<button id="generate-select-conjugations-table">Start choosing conjugations</button>
+			</div>
+			<p>
+				<span id="text-before-table"></span>
+			</p>
+			<table>
+				<tbody id="tbody">
+					<!-- Generated rows look like this: -->
+					<!-- <tr>
                     <td lang="la">
                         amō, amāre, amāvī, amātum
                     </td>
@@ -38,10 +38,10 @@
                         <input list="conjugation-descriptions" value="1st, non-deponent">
                     </td>
                 </tr> -->
-            </tbody>
-            <datalist id="conjugation-descriptions">
-                <!-- Generated options look like this: -->
-                <!-- <option value="1st, non-deponent"></option>
+				</tbody>
+				<datalist id="conjugation-descriptions">
+					<!-- Generated options look like this: -->
+					<!-- <option value="1st, non-deponent"></option>
                 <option value="2nd, non-deponent"></option>
                 <option value="3rd, non-deponent"></option>
                 <option value="4th, non-deponent"></option>
@@ -49,129 +49,156 @@
                 <option value="2nd, deponent"></option>
                 <option value="4th, deponent"></option>
                 <option value="3rd, deponent"></option> -->
-            </datalist>
-        </table>
-        <div id="tickboxes-wrapper">
-            <div>
-                <input type="checkbox" id="include-stressed-endings" />
-                <label for="include-stressed-endings">Include stressed endings?</label>
-            </div>
-            <div>
-                <input type="checkbox" id="combine-lemmata" checked />
-                <label for="combine-lemmata">Combine forms from multiple lemmata?</label>
-            </div>
-            <div>
-                <input type="checkbox" id="output-lemma" checked />
-                <label for="output-lemma">Output lemma with each form?</label>
-            </div>
-        </div>
-        <div>
-            <button id="conjugate">Conjugate</button><br/>
-        </div>
-        <label for="textarea-output">Output forms:</label><br/>
-        <textarea id="textarea-output" lang="la" readonly></textarea>
-        <div>
-            <span id="text-by-copy-to-clipboard"></span>
-            <button id="copy-to-clipboard">Copy to clipboard</button>
-        </div>
+				</datalist>
+			</table>
+			<div id="tickboxes-wrapper">
+				<div>
+					<input type="checkbox" id="include-stressed-endings" />
+					<label for="include-stressed-endings">Include stressed endings?</label>
+				</div>
+				<div>
+					<input type="checkbox" id="combine-lemmata" checked />
+					<label for="combine-lemmata">Combine forms from multiple lemmata?</label>
+				</div>
+				<div>
+					<input type="checkbox" id="output-lemma" checked />
+					<label for="output-lemma">Output lemma with each form?</label>
+				</div>
+			</div>
+			<div><button id="conjugate">Conjugate</button><br /></div>
+			<label for="textarea-output">Output forms:</label><br />
+			<textarea id="textarea-output" lang="la" readonly></textarea>
+			<div>
+				<span id="text-by-copy-to-clipboard"></span>
+				<button id="copy-to-clipboard">Copy to clipboard</button>
+			</div>
 
-        <section id="about">
-            <h2>About</h2>
-            <div class="ins">
-                <p>
-                    <ins datetime="2024-11-01">
-                        Note from 2024: the text below was written when I had use for this page.
-                        I no longer use it.
-                        It made sense while my velut project was based in Excel.
-                        Now, the project is based in Json data, with scripts that read Json, write Json, and upload Json to the velut database.
-                        The <a href="https://www.duncanritchie.co.uk/velut-inflector">Inflector</a> is the script that supersedes this conjugations page.
-                    </ins>
-                </p>
-                <p>
-                    <ins datetime="2024-11-01">
-                        One benefit of the Inflector is that, because it’s reading Json, extra fields can be added to the input Json to get custom behaviour beyond what’s implied by the principal parts of a verb.
-                        With this conjugations page, you might specify that a verb is <q lang="la">orior orīrī ortum</q>, but there’s no way of saying the verb is intransitive, has future active participles like <q lang="la">oritūrus</q>, or has some other unexpected forms (eg <q lang="la">oritur</q> instead of <q lang="la">orītur</q>).
-                        The Inflector can handle that, and as a script can be easily run again and again without clicking buttons in a page such as this one.
-                    </ins>
-                </p>
-            </div>
-            <p>
-                <a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a> is my Latin vocabulary website. I review all words before adding them to velut. This is made faster by generating forms using this webpage.
-            </p>
-            <p>
-                If you’re not me (Duncan Ritchie), you’re unlikely to have much use for this page. If you’re interested in Latin vocabulary though, you should definitely take a look at <a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a>!
-            </p>
-            <h3>Note on the word “lemma”</h3>
-            <p>
-                The lemma of a word is the form given as the headword in dictionaries; for verbs it’s usually the 1st-person singular present active indicative.
-            </p>
-            <h3>How to use</h3>
-            <p>
-                Enter the three or four principal parts of Latin verbs into the first input box. These can be separated by spaces or commas. Sets of principal parts should be separated by semicolons or line-breaks. (For example: “<span lang="la">amō amāre amāvī amātum; doceō docēre docuī doctum; loquor loquī locūtum</span>”.) I provide some sample words that you can load if you want.
-            </p>
-            <p>
-                Then, click the “Start choosing conjugations” button. A table will appear listing every word you put in, alongside a conjugation — such as “1st, non-deponent” — that has been automatically determined for each word.
-            </p>
-            <p>
-                This page determines the conjugation based on the final letters of the infinitive, so is frequently wrong. You can, however, edit the conjugation, by deleting the incorrect text and choosing a different conjugation from the list that appears.
-            </p>
-            <p>
-                Once you are happy with the table of lemmata and conjugations, click “Conjugate”. A list of all the forms will appear in the box underneath. Forms that are stressed on the ending may appear if the “Include stressed endings” tickbox is ticked. The lemma that each form came from may appear beside each lemma (separated by a tab), depending on whether the “Output lemma” tickbox is ticked.
-            </p>
-            <p>
-                Finally, you can click the “Copy to clipboard” button.
-            </p>
-            <h3>Caveats</h3>
-            <p>
-                Please note: you need to look over all the conjugated forms that have been generated, because this webpage is quite rudimentary and not every inflection makes sense for every lemma.
-            </p>
-            <p>
-                Also, this page assumes you’re capable of entering letters with macra (the diacritics on ĀĒĪŌŪȲāēīōūȳ) into the first input box.
-            </p>
-            <p>
-                If the input forms do not end with the letters this page expects, the output forms will probably be wrong.
-            </p>
-            <p>
-                Some Latin verbs are more irregular in their endings, so this page won’t handle them correctly.
-            </p>
-            <p>
-                You should also be aware that this page may generate forms that are not attested for the verb: for instance, this page generates passive forms for all non-deponent verbs, but some verbs don’t exist in the passive.
-            </p>
-            <h3>What I use this for</h3>
-            <p>
-                This webpage is convenient for me because much of the data for velut (my Latin dictionary) is generated by and stored in a large Excel file. For each word, I need to generate several values based off the word and the lemma (or lemmata) that the word belongs to. A sheet in my Excel file generates the values I need, based off whatever text is pasted into two of the columns (the “word” and “lemmata” columns).
-            </p>
-            <p>
-                Therefore, I can paste the output from this webpage into my Excel file, check everything is correct (it probably isn’t), and that’s how I generate everything velut needs for each word.
-            </p>
-            <h3>The de-Excellation of velut</h3>
-            <p>
-                The Excel file that stores, generates, and manages all the data for velut is very large and complex. This is a problem for several reasons — loading and saving the file takes a long time, occasionally it crashes and I lose work, I can’t choose to make some data or some functionality publicly visibly without making it all publicly visible…
-            </p>
-            <p>
-                That’s why I am in the process of reducing velut’s reliance on Excel, by re-creating all the functionality in the velut Excel file as webpages or websites and by exporting all the data to MongoDB databases or Json files to be used by the webpages/sites.
-            </p>
-            <p>
-                This webpage is a part of that, since it replaces an Excel sheet that was generating conjugated forms.
-            </p>
-            <p>
-                I had a similar Excel sheet that generated declined forms of nouns, adjectives, and adverbs. I have replaced it with a <a href="https://velut-decliner.netlify.app/" title="Duncan’s Latin declensions for velut">webpage</a> similar to this one, but for declensions.
-            </p>
-            <p>
-                As more and more of velut gets de-Excellated, further changes will be needed to this page. For now, it’s okay.
-            </p>
-        </section>
-    </main>
-    <footer>
-        <ul>
-            <li>
-                <a href="https://www.duncanritchie.co.uk/" title="Duncan Ritchie’s website">Made by Duncan Ritchie</a>
-            </li>
-            <li>
-                <a href="https://github.com/DuncanRitchie/velut-conjugator" title="Code for this page on GitHub">See the code</a>
-            </li>
-        </ul>
-    </footer>
-    <script src="./main.js"></script>
-</body>
+			<section id="about">
+				<h2>About</h2>
+				<div class="ins">
+					<p>
+						<ins datetime="2024-11-01">
+							Note from 2024: the text below was written when I had use for this page. I no longer use it. It made sense
+							while my velut project was based in Excel. Now, the project is based in Json data, with scripts that read
+							Json, write Json, and upload Json to the velut database. The
+							<a href="https://www.duncanritchie.co.uk/velut-inflector">Inflector</a> is the script that supersedes this
+							conjugations page.
+						</ins>
+					</p>
+					<p>
+						<ins datetime="2024-11-01">
+							One benefit of the Inflector is that, because it’s reading Json, extra fields can be added to the input
+							Json to get custom behaviour beyond what’s implied by the principal parts of a verb. With this
+							conjugations page, you might specify that a verb is <q lang="la">orior orīrī ortum</q>, but there’s no way
+							of saying the verb is intransitive, has future active participles like <q lang="la">oritūrus</q>, or has
+							some other unexpected forms (eg <q lang="la">oritur</q> instead of <q lang="la">orītur</q>). The Inflector
+							can handle that, and as a script can be easily run again and again without clicking buttons in a page such
+							as this one.
+						</ins>
+					</p>
+				</div>
+				<p>
+					<a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a> is my Latin vocabulary
+					website. I review all words before adding them to velut. This is made faster by generating forms using this
+					webpage.
+				</p>
+				<p>
+					If you’re not me (Duncan Ritchie), you’re unlikely to have much use for this page. If you’re interested in
+					Latin vocabulary though, you should definitely take a look at
+					<a href="https://www.velut.co.uk/" title="velut — a Latin rhyming dictionary">velut</a>!
+				</p>
+				<h3>Note on the word “lemma”</h3>
+				<p>
+					The lemma of a word is the form given as the headword in dictionaries; for verbs it’s usually the 1st-person
+					singular present active indicative.
+				</p>
+				<h3>How to use</h3>
+				<p>
+					Enter the three or four principal parts of Latin verbs into the first input box. These can be separated by
+					spaces or commas. Sets of principal parts should be separated by semicolons or line-breaks. (For example:
+					“<span lang="la">amō amāre amāvī amātum; doceō docēre docuī doctum; loquor loquī locūtum</span>”.) I provide
+					some sample words that you can load if you want.
+				</p>
+				<p>
+					Then, click the “Start choosing conjugations” button. A table will appear listing every word you put in,
+					alongside a conjugation — such as “1st, non-deponent” — that has been automatically determined for each word.
+				</p>
+				<p>
+					This page determines the conjugation based on the final letters of the infinitive, so is frequently wrong. You
+					can, however, edit the conjugation, by deleting the incorrect text and choosing a different conjugation from
+					the list that appears.
+				</p>
+				<p>
+					Once you are happy with the table of lemmata and conjugations, click “Conjugate”. A list of all the forms will
+					appear in the box underneath. Forms that are stressed on the ending may appear if the “Include stressed
+					endings” tickbox is ticked. The lemma that each form came from may appear beside each lemma (separated by a
+					tab), depending on whether the “Output lemma” tickbox is ticked.
+				</p>
+				<p>Finally, you can click the “Copy to clipboard” button.</p>
+				<h3>Caveats</h3>
+				<p>
+					Please note: you need to look over all the conjugated forms that have been generated, because this webpage is
+					quite rudimentary and not every inflection makes sense for every lemma.
+				</p>
+				<p>
+					Also, this page assumes you’re capable of entering letters with macra (the diacritics on ĀĒĪŌŪȲāēīōūȳ) into
+					the first input box.
+				</p>
+				<p>
+					If the input forms do not end with the letters this page expects, the output forms will probably be wrong.
+				</p>
+				<p>Some Latin verbs are more irregular in their endings, so this page won’t handle them correctly.</p>
+				<p>
+					You should also be aware that this page may generate forms that are not attested for the verb: for instance,
+					this page generates passive forms for all non-deponent verbs, but some verbs don’t exist in the passive.
+				</p>
+				<h3>What I use this for</h3>
+				<p>
+					This webpage is convenient for me because much of the data for velut (my Latin dictionary) is generated by and
+					stored in a large Excel file. For each word, I need to generate several values based off the word and the
+					lemma (or lemmata) that the word belongs to. A sheet in my Excel file generates the values I need, based off
+					whatever text is pasted into two of the columns (the “word” and “lemmata” columns).
+				</p>
+				<p>
+					Therefore, I can paste the output from this webpage into my Excel file, check everything is correct (it
+					probably isn’t), and that’s how I generate everything velut needs for each word.
+				</p>
+				<h3>The de-Excellation of velut</h3>
+				<p>
+					The Excel file that stores, generates, and manages all the data for velut is very large and complex. This is a
+					problem for several reasons — loading and saving the file takes a long time, occasionally it crashes and I
+					lose work, I can’t choose to make some data or some functionality publicly visibly without making it all
+					publicly visible…
+				</p>
+				<p>
+					That’s why I am in the process of reducing velut’s reliance on Excel, by re-creating all the functionality in
+					the velut Excel file as webpages or websites and by exporting all the data to MongoDB databases or Json files
+					to be used by the webpages/sites.
+				</p>
+				<p>This webpage is a part of that, since it replaces an Excel sheet that was generating conjugated forms.</p>
+				<p>
+					I had a similar Excel sheet that generated declined forms of nouns, adjectives, and adverbs. I have replaced
+					it with a
+					<a href="https://velut-decliner.netlify.app/" title="Duncan’s Latin declensions for velut">webpage</a> similar
+					to this one, but for declensions.
+				</p>
+				<p>
+					As more and more of velut gets de-Excellated, further changes will be needed to this page. For now, it’s okay.
+				</p>
+			</section>
+		</main>
+		<footer>
+			<ul>
+				<li>
+					<a href="https://www.duncanritchie.co.uk/" title="Duncan Ritchie’s website">Made by Duncan Ritchie</a>
+				</li>
+				<li>
+					<a href="https://github.com/DuncanRitchie/velut-conjugator" title="Code for this page on GitHub"
+						>See the code</a
+					>
+				</li>
+			</ul>
+		</footer>
+		<script src="./main.js"></script>
+	</body>
 </html>
